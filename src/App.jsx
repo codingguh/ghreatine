@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(asyncIsPreload());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -33,6 +33,7 @@ function App() {
       <HeaderNavigation authUser={authUser} onLogout={onLogout} />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/ghreatine" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/leaderboards" element={<LeaderBoardPage />} />

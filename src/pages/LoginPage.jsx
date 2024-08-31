@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const onLogin = ({ email, password }) => {
     dispatch(asyncLogin({ email, password })).then(({ status }) => {
-      if (status === 'success') navigate('/');
+      if (status === 'success') navigate('/ghreatine');
     });
   };
 
