@@ -13,7 +13,6 @@ import {
   Avatar,
   Menu,
 } from "@mantine/core";
-import { MantineLogo } from "@mantinex/mantine-logo";
 import { useDisclosure } from "@mantine/hooks";
 import { IconLogout } from "@tabler/icons-react";
 import classes from "./HeaderNavigation.module.css";
