@@ -164,7 +164,7 @@ function HeaderNavigation({ authUser, onLogout }) {
             className={classes.link}
             style={{ paddingBottom: "30px", fontSize: "17px" }}
           >
-            <IconLogout/> Logout
+            <IconLogout color="red"/> &nbsp;<span style={{color:'red'}}>Logout</span>
           </Link>
           
         </ScrollArea>
