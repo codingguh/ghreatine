@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Actions from './actions';
-import Heading from './heading';
+import Heading from './Heading';
 import { Avatar } from '@mantine/core';
 import { asyncToggleVoteDetailThread } from '../../../redux/states/detailThread/action';
 import { asyncToggleVoteThread } from '../../../redux/states/threads/action';
