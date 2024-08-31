@@ -1,11 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 import "@mantine/core/styles.css";
-import { createTheme, MantineProvider } from '@mantine/core';
-import { Provider } from 'react-redux';
-import { store } from './redux/store.js';
+import { createTheme, MantineProvider } from "@mantine/core";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
+import { BrowserRouter } from "react-router-dom";
 // import "@mantine/notifications/styles.css";
 
 const theme = createTheme({
@@ -13,12 +14,14 @@ const theme = createTheme({
   primaryColor: "blue",
 });
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-    <MantineProvider theme={theme}>
-    <App />
-    </MantineProvider>
+      <BrowserRouter>
+        <MantineProvider theme={theme}>
+          <App />
+        </MantineProvider>
+      </BrowserRouter>
     </Provider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

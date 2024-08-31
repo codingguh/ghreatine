@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 const Feed = ({threads}) => {
   const { users } = useSelector((state) => state);
 
+  
+
   return (
 
     <section>

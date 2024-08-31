@@ -13,14 +13,17 @@ import {
   Avatar,
   Menu,
 } from "@mantine/core";
+import PropTypes from "prop-types";
 import { useDisclosure } from "@mantine/hooks";
 import { IconLogout } from "@tabler/icons-react";
 import classes from "./HeaderNavigation.module.css";
 import { Link } from "react-router-dom";
 
-function HeaderNavigation() {
+function HeaderNavigation({ authUser, onLogout }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+
+  console.log("auth user", authUser);
 
   return (
     <Box
@@ -35,17 +38,17 @@ function HeaderNavigation() {
     >
       <header className={classes.header} style={{ position: "sticky" }}>
         <Group justify="space-between" h="100%">
-        <Link
-          to="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
-          Ghreatine
-        </Link>
+          <Link
+            to="/"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            <img
+              className="w-8 h-8 mr-2"
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+              alt="logo"
+            />
+            Ghreatine
+          </Link>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link to="/" className={classes.link}>
@@ -89,21 +92,28 @@ function HeaderNavigation() {
             </Link>
           </Group>
 
-          {/* <Button variant="default">Log in</Button> */}
-          {/* <Avatar  name="John Doe" color="initials" />
-           */}
           <Menu trigger="click-hover" openDelay={100} closeDelay={400}>
-            <Menu.Target>
-              <Group>
-                <Avatar src={null} alt="Vitaly Rtishchev" color="indigo">
-                  VR
-                </Avatar>
-                <Text>Vincent Raditya</Text>
-              </Group>
-            </Menu.Target>
+            {authUser !== null ? (
+              <>
+                <Menu.Target>
+                  <Group>
+                    <Avatar src={null} alt="User Avatar" color="indigo">
+                      {/* {authUser.charAt(0).toUpperCase()} */}
+                    </Avatar>
+                    <Text>{authUser.name}</Text>
+                  </Group>
+                </Menu.Target>
+              </>
+            ) : (
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+            )}
+
             <Menu.Dropdown>
               <Menu.Item
                 color="red"
+                onClick={onLogout}
                 leftSection={
                   <IconLogout style={{ width: rem(14), height: rem(14) }} />
                 }
@@ -153,5 +163,14 @@ function HeaderNavigation() {
     </Box>
   );
 }
+
+// HeaderNavigation.defaultProps = {
+//   authUser: null,
+// };
+
+HeaderNavigation.propTypes = {
+  authUser: PropTypes.string,
+  onLogout: PropTypes.func.isRequired,
+};
 
 export default HeaderNavigation;

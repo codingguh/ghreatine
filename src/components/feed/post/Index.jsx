@@ -5,6 +5,8 @@ import { Avatar } from '@mantine/core';
 import { asyncToggleVoteDetailThread } from '../../../redux/states/detailThread/action';
 import { asyncToggleVoteThread } from '../../../redux/states/threads/action';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Parse from 'html-react-parser';
 
 const Post = ({ id,
   title,
@@ -44,7 +46,8 @@ const Post = ({ id,
       <Avatar name={owner.name} color="initials" />
       <div>
         <Heading name={owner.name} username={owner.name} time={createdAt} />
-        <p>{title}</p>
+        <Link to={`/thread/${id}`} style={{textDecoration:'underline'}}><span style={{fontWeight:'bold',textDecoration:'uderline',cursor:'pointer'}}>{title}</span></Link>
+        <div className='line-clamp-2 flex-1'>{Parse(body)}</div>
         #{category}
         <Actions 
         
@@ -60,9 +63,9 @@ const Post = ({ id,
   };
 
 
-Post.defaultProps = {
-  type: 'thread',
-};
+// Post.defaultProps = {
+//   type: 'thread',
+// };
 
 Post.propTypes = {
   id: PropTypes.string.isRequired,
