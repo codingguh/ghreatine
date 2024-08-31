@@ -158,6 +158,15 @@ function HeaderNavigation({ authUser, onLogout }) {
           >
             Leaderboard
           </Link>
+          <Link
+            to="/"
+            onClick={onLogout}
+            className={classes.link}
+            style={{ paddingBottom: "30px", fontSize: "17px" }}
+          >
+            <IconLogout/> Logout
+          </Link>
+          
         </ScrollArea>
       </Drawer>
     </Box>
