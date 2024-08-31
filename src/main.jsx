@@ -5,7 +5,7 @@ import './index.css'
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from '@mantine/core';
 import { Provider } from 'react-redux';
-import store from './redux/index.js';
+import { store } from './redux/store.js';
 // import "@mantine/notifications/styles.css";
 
 const theme = createTheme({

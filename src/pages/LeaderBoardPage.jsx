@@ -1,17 +1,16 @@
 import { Avatar,  Container,  Divider,  Group,  Table,  } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncPopulateLeaderboards } from "../redux/leaderBoards/action";
 import { useEffect } from "react";
+import { asyncGetLeaderboards } from "../redux/states/leaderboards/action";
 
-const LeaderBoardPage = () => {
-   
+export default function LeaderBoardPage () {
+  const dispatch = useDispatch();
+  const { leaderboards } = useSelector((state) => state);
 
-      const dispatch = useDispatch();
-      const { leaderboards = [] } = useSelector((states) => states);
+  useEffect(() => {
+    dispatch(asyncGetLeaderboards());
+  }, []);
 
-      useEffect(() => {
-        dispatch(asyncPopulateLeaderboards());
-      }, [dispatch]);
 
       const rows = leaderboards.map((element,index) => (
         <Table.Tr key={index}>
@@ -39,4 +38,4 @@ const LeaderBoardPage = () => {
   );
 };
 
-export default LeaderBoardPage;
+
