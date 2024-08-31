@@ -36,7 +36,17 @@ function HeaderNavigation() {
     >
       <header className={classes.header} style={{ position: "sticky" }}>
         <Group justify="space-between" h="100%">
-          <MantineLogo size={30} />
+        <Link
+          to="/"
+          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+        >
+          <img
+            className="w-8 h-8 mr-2"
+            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+            alt="logo"
+          />
+          Ghreatine
+        </Link>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link to="/" className={classes.link}>

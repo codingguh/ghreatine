@@ -1,25 +1,30 @@
+import PropTypes from 'prop-types';
 import { Button } from "@mantine/core";
 
-const Hashtag = () => {
-  const hashtags = [
-    { id: 1, label: "#redux" },
-    { id: 2, label: "#perkenalan" },
-    // Add more hashtags as needed
-  ];
+export default function Hashtag({ categories, keyword, onKeyword }){
+
   return (
     <div className="px-8">
-      {hashtags.map((hashtag) => (
+      {categories.map((category,index) => (
         <Button
-          key={hashtag.id}
-          variant="outline"
-          color="black"
-          className="mr-3"
+          key={index}
+          variant='outline'
+       
+          // variant={` ${category !== keyword?.toLocaleLowerCase() ? 'filled' : '?outline'}`}
+          color={`${category !== keyword?.toLocaleLowerCase() ? 'black' : 'blue'}`}
+          className={"mr-3 font-bold"}
+          onClick={() => onKeyword(category)}
         >
-          {hashtag.label}
+          #
+          {category}
         </Button>
       ))}
     </div>
   );
 };
 
-export default Hashtag;
+Hashtag.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  keyword: PropTypes.string.isRequired,
+  onKeyword: PropTypes.func.isRequired,
+};

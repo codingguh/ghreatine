@@ -1,32 +1,84 @@
 import PropTypes from 'prop-types';
-import Avatar from '../../avatar';
 import Actions from './actions';
 import Heading from './heading';
+import { Avatar } from '@mantine/core';
+import { asyncToggleVoteDetailThread } from '../../../redux/states/detailThread/action';
+import { asyncToggleVoteThread } from '../../../redux/states/threads/action';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Post = ({ post }) => (
-  <div className="border-t-[1px] px-4 pt-3 pb-2 hover:bg-neutral-100 transition-colors duration-500 ease-out">
+const Post = ({ id,
+  title,
+  body,
+  category,
+  createdAt,
+  owner,
+  totalComments,
+  upVotesBy,
+  downVotesBy,
+  type, }) => {
+    const dispatch = useDispatch();
+    const { authUser } = useSelector((state) => state);
+  
+    const onToggleVoteThread = (voteType) => {
+      if (authUser) {
+        if (type === 'threads') {
+          dispatch(
+            asyncToggleVoteThread({ threadId: id, voteType, userId: authUser.id }),
+          );
+        } else {
+          dispatch(
+            asyncToggleVoteDetailThread({
+              threadId: id,
+              voteType,
+              userId: authUser.id,
+            }),
+          );
+        }
+      } else {
+        alert('Please login first');
+      }
+    };
+
+  return (<div className="border-t-[1px] px-4 pt-3 pb-2 hover:bg-neutral-100 transition-colors duration-500 ease-out">
     <div className="grid grid-cols-[auto,1fr] gap-3">
-      <Avatar src={post.image} alt={post.username} />
+      <Avatar name={owner.name} color="initials" />
       <div>
-        <Heading name={post.name} username={post.username} time={post.time} />
-        <p>{post.caption}</p>
-        <Actions replies={post.replies} retweets={post.retweets} likes={post.likes} />
+        <Heading name={owner.name} username={owner.name} time={createdAt} />
+        <p>{title}</p>
+        #{category}
+        <Actions 
+        
+        id={id}
+            totalComments={totalComments}
+            upVotesBy={upVotesBy}
+            downVotesBy={downVotesBy}
+            onToggleVoteThread={onToggleVoteThread}
+        />
       </div>
     </div>
-  </div>
-);
+  </div>)
+  };
+
+
+Post.defaultProps = {
+  type: 'thread',
+};
 
 Post.propTypes = {
-  post: PropTypes.shape({
-    image: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-    replies: PropTypes.number.isRequired,
-    retweets: PropTypes.number.isRequired,
-    likes: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
   }).isRequired,
+  totalComments: PropTypes.number.isRequired,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  type: PropTypes.string,
 };
 
 
