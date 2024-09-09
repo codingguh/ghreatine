@@ -12,7 +12,7 @@ export default function Hashtag({ categories, keyword, onKeyword }){
        
           // variant={` ${category !== keyword?.toLocaleLowerCase() ? 'filled' : '?outline'}`}
           color={`${category !== keyword?.toLocaleLowerCase() ? 'black' : 'blue'}`}
-          className={"mr-3 font-bold"}
+          className={"mr-3 font-bold mt-2"}
           onClick={() => onKeyword(category)}
         >
           #

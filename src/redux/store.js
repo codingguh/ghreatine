@@ -5,6 +5,7 @@ import usersReducer from './states/users/reducer';
 import threadsReducer from './states/threads/reducer';
 import leaderboardsReducer from './states/leaderboards/reducer';
 import authUserReducer from './states/authUser/reducer';
+import detailThreadReducer from './states/detailThread/reducer';
 
 const rootReducer = combineReducers({
   isPreload: isPreloadReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   authUser: authUserReducer,
   users: usersReducer,
   threads: threadsReducer,
+  detailThread: detailThreadReducer,
   leaderboards: leaderboardsReducer,
 }); 
 

@@ -7,7 +7,7 @@ import { asyncPopulateUsersAndThreads } from "../redux/states/shared/action";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const threads = useSelector((state) => state.threads);
+  const { threads, authUser } = useSelector((state) => state);
   const [keyword, setKeyword] = useState("");
 
   const onKeyword = (category) =>
@@ -16,7 +16,6 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
-
 
   const threadsList = threads.filter((thread) =>
     thread.category.includes(keyword)
@@ -40,10 +39,10 @@ export default function HomePage() {
           />
         </div>
         <div className="order-2 lg:order-2 max-w-[37rem] border-x-[1px] mt-4 lg:mt-0 px-6 py-6 lg:overflow-y-auto lg:max-h-[calc(100vh-100px)]">
-          <Feed  threads={threadsList}/>
+          <Feed threads={threadsList} />
         </div>
       </div>
-      <AddButton />
+      {authUser && <AddButton />}
     </div>
   );
 }
