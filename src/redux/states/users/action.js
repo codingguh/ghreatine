@@ -34,14 +34,14 @@ function asyncRegisterUser({ name, email, password }) {
       notifications.show({
         title: "Registration Successful",
         message: "Your account has been created successfully!",
-        position: "top-left",  // Ensure position is set here
+        position: "top-right",  // Ensure position is set here
       });
       return { status: "success" };
     } catch (error) {
       notifications.show({
         title: "Registration Failed",
         message: error.message || "Something went wrong. Please try again.",
-        position: "top-left",  // Ensure position is set here
+        position: "top-right",  // Ensure position is set here
         color: "red",
       });
       return {

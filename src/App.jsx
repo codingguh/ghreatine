@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(asyncIsPreload());
-  }, [dispatch]);
+  }, []);
 
   if (isPreload) {
     return null;
@@ -34,8 +34,11 @@ function App() {
   
   return (
     <>
-      <LoadingBar className="bg-blue-500 h-1 absolute" />
       <HeaderNavigation authUser={authUser} onLogout={onLogout} />
+      <LoadingBar style={{ backgroundColor: 'blue', height: '4px', position: 'fixed', top: '0', zIndex: '9999' }} />
+
+      <main className="mx-auto max-w-7xl p-4">
+    
       <Routes>
         <Route path="/" element={<Navigate to="/ghreatine" />} />
         <Route path="/ghreatine" element={<HomePage />} />
@@ -45,6 +48,7 @@ function App() {
         <Route path="/leaderboards" element={<LeaderBoardPage />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
+      </main>
     </>
   );
 }

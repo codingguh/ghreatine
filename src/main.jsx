@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { BrowserRouter } from "react-router-dom";
 import { Notifications } from '@mantine/notifications';
-// import "@mantine/notifications/styles.css";
+import "@mantine/notifications/styles.css";
 
 const theme = createTheme({
   fontFamily: "Open Sans, sans-serif",
