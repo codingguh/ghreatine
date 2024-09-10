@@ -7,6 +7,7 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { BrowserRouter } from "react-router-dom";
+import { Notifications } from '@mantine/notifications';
 // import "@mantine/notifications/styles.css";
 
 const theme = createTheme({
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <MantineProvider theme={theme}>
+        <Notifications  position="top-right" zIndex={1000}/>
           <App />
         </MantineProvider>
       </BrowserRouter>

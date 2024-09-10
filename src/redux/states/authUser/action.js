@@ -1,5 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../../utils/api';
+import { notifications } from '@mantine/notifications';
 
 const ActionType = {
   LOGIN: 'authUser/login',
@@ -31,7 +32,12 @@ function asyncLogin({ email, password }) {
       dispatch(loginActionCreator(user));
       return { status: 'success' };
     } catch (error) {
-      alert(error.message);
+      notifications.show({
+        color: 'red',
+        title: 'Error',
+        message: error.message||'error',
+        
+      })
       return { status: 'error' };
     } finally {
       dispatch(hideLoading());
